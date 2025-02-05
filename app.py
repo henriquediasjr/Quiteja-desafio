@@ -33,7 +33,7 @@ dados_criticos.rename(columns={'nome': 'nome_tipo'}, inplace=True)
 # Cria o arquivo insert-dados.sql com os dados filtrados
 with open('insert-dados.sql', 'w') as f:
     for index, row in dados_criticos.iterrows():
-        insert_statement = f"INSERT INTO dados_finais (id, created_at, status, tipo, nome_tipo) VALUES ({row['id']}, '{row['created_at']}', '{row['status']}', {row['tipo']}, '{row['nome_tipo']}');\n"
+        insert_statement = f"INSERT INTO dados_finais (id, created_at, status, tipo, nome_tipo) VALUES ({row['id']}, {row['created_at']}, '{row['status']}', '{row['tipo']}', '{row['nome_tipo']}');\n"
         f.write(insert_statement)
 
 # Cria a aplicação Flask
@@ -50,6 +50,11 @@ def get_tipo(id):
         return jsonify({'id': id, 'nome': tipo}), 200
     else:
         return jsonify({'error': 'Tipo não encontrado'}), 404
+
+# Rota raiz para evitar 404
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({'message': 'API is running. Use /tipo/<id> to get type by ID.'}), 200
 
 # Inicia o servidor Flask
 if __name__ == '__main__':
