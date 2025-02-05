@@ -29,9 +29,6 @@ pip install pandas flask
 
 ### 3. Prepare the Files
 1. Place the dados.zip file in the same directory as the script.
-2. Ensure that dados.zip contains the following files:
-    - origem-dados.csv
-    - tipos.csv
 
 ### 4. Run the Script
 Run the Python script using the following command:
